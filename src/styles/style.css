@@ -1,0 +1,94 @@
+:root {
+  --height-elem: 100px;
+}
+
+body {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.hide {
+  display: none;
+}
+
+.game {
+  height: 100%;
+  display: flex;
+}
+
+.car, .enemy {
+  width: calc(var(--height-elem) / 2);
+  height: var(--height-elem);
+  background: transparent url('../img/player.png') center / contain no-repeat;
+  position: absolute;
+  left: 125px;
+  bottom: 10px;
+}
+
+.gameArea {
+  width: 300px;
+  height: 100vh;
+  position: relative;
+  margin: auto;
+  background: #222;
+  overflow: hidden;
+}
+
+.line {
+  position: absolute;
+  width: 10px;
+  height: calc(var(--height-elem) / 2);
+  background: #fff;
+  left: 145px;
+}
+
+.start {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  z-index: 200;
+  background: black;
+  font-family: sans-serif;
+  font-weight: 700;
+  height: calc(50px - 2rem);
+  box-shadow: 3px 3px 5px 1px #ccc;
+  font-size: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn {
+  font: inherit;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 5px 15px;
+}
+
+.btn:not(:last-child) {
+  margin-right: 15px;
+}
+
+.btn:disabled {
+  background-color: #ccc;
+  color: #ddd;
+}
+
+.score {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: calc(50px - 2rem);
+  background: black;
+  padding: 1rem;
+  z-index: 200;
+  font-size: 1.5rem;
+  color: skyblue;
+  text-align: center;
+  font-family: sans-serif;
+  box-shadow: -3px -3px 5px 1px #ccc;
+}
