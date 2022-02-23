@@ -1,5 +1,6 @@
 :root {
   --height-elem: 100px;
+  --width-game-area: 300px;
 }
 
 body {
@@ -23,7 +24,7 @@ body {
 }
 
 .gameArea {
-  width: 300px;
+  width: var(--width-game-area);
   height: 100vh;
   position: relative;
   margin: auto;
@@ -89,4 +90,24 @@ body {
   text-align: center;
   font-family: sans-serif;
   box-shadow: -3px -3px 5px 1px #ccc;
+}
+
+
+.tree {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: transparent url("../img/tree.png") center / cover no-repeat;
+}
+
+.treesideLeft, .treesideRight {
+  position: absolute;
+  width: calc((100% - var(--width-game-area)) / 2);
+  height: 100vh;
+  overflow: hidden;
+}
+
+.treesideRight {
+  top: 0;
+  right: 0;
 }

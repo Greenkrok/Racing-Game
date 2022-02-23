@@ -6,6 +6,8 @@ const score = document.querySelector('.score'),
   gameArea = document.querySelector('.gameArea'),
   car = document.createElement('div'),
   btns = document.querySelectorAll('.btn');
+  treesideLeft = document.querySelector(".treesideLeft"),
+  treesideRight = document.querySelector(".treesideRight");
 
 const music = new Audio('./src/audio.mp3');
   music.volume = 0.05;
@@ -39,7 +41,7 @@ const changeLevel = (lvl) => {
     case '2':
       setting.traffic = 3;
       setting.speed = 6;
-      car.style.background = 'transparent url("./src/img/playerMed.png") center / contain no-repeat';
+      car.style.background = 'transparent url("./src/img/playerMid.png") center / contain no-repeat';
       break;
     case '3':
       setting.traffic = 3;
@@ -75,14 +77,31 @@ function startGame(event) {
   start.classList.add('hide');
 
   gameArea.innerHTML = '';
+  treesideLeft.innerHTML = '';
+  treesideRight.innerHTML = '';
 
   for (let i = 0; i < getQuantityElements(HEIGHT_ELEM); i++) {
     const line = document.createElement('div');
     line.classList.add('line');
-    line.style.top = (i * HEIGHT_ELEM) + 'px';
-    line.style.height = (HEIGHT_ELEM / 2) + 'px';
     line.y = i * HEIGHT_ELEM;
+    line.style.top = line.y + 'px';
+    line.style.height = (HEIGHT_ELEM / 2) + 'px';
     gameArea.append(line);
+
+    
+    function createTree() {
+      const tree = document.createElement('div');
+      tree.classList.add('tree');
+      tree.style.left = Math.random() * (treesideLeft.offsetWidth - 50) + 'px';
+      tree.style.right = Math.random() * (treesideRight.offsetWidth - 50) + 'px';
+      tree.y = i * HEIGHT_ELEM;
+      tree.style.top = tree.y + 'px';
+    
+      return tree;
+    }
+
+    treesideLeft.append( createTree() );
+    treesideRight.append( createTree() );
   }
 
   for (let i = 0; i < getQuantityElements(HEIGHT_ELEM * setting.traffic); i++) {
@@ -158,15 +177,19 @@ function stopRun(event) {
 
 function moveRoad() {
   let lines = document.querySelectorAll('.line');
-  lines.forEach(function(line) {
-    line.y += setting.speed;
-    line.style.top = line.y + 'px';
+  let trees = document.querySelectorAll('.tree');
+  const moveItem = (item) => {
+    item.y += setting.speed;
+    item.style.top = item.y + 'px';
 
-    if(line.y >= gameArea.offsetHeight) {
-      line.y = -HEIGHT_ELEM;
+    if(item.y >= gameArea.offsetHeight) {
+      item.y = -HEIGHT_ELEM;
     }
 
-  });
+  }
+
+  lines.forEach( (line) => moveItem(line) );
+  trees.forEach( (tree) => moveItem(tree) );
 }
 
 function moveEnemy() {
