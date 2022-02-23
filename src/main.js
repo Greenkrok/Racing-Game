@@ -48,7 +48,7 @@ const changeLevel = (lvl) => {
   startSpeed = setting.speed;
 };
 
-function getQuantityElements(heightElement) {
+function getQuantityElements(heightElement = 100) {
   return (gameArea.offsetHeight / heightElement) + 1;
 }
 
@@ -101,7 +101,7 @@ function startGame(event) {
   gameArea.append(car);
   car.style.left = (gameArea.offsetWidth - car.offsetWidth)/2 + 'px';
   car.style.top = 'auto';
-  car.style.bottom = '10px';
+  car.style.bottom = '20px';
   setting.x = car.offsetLeft;
   setting.y = car.offsetTop;
   requestAnimationFrame(playGame);
