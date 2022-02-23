@@ -1,4 +1,4 @@
-const MAX_ENEMY = 7;
+const MAX_ENEMY = 8;
 const HEIGHT_ELEM = 100;
 
 const score = document.querySelector('.score'),
