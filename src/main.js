@@ -34,14 +34,17 @@ const changeLevel = (lvl) => {
     case '1':
       setting.traffic = 4;
       setting.speed = 3;
+      car.style.background = 'transparent url("./src/img/playerEasy.png") center / contain no-repeat';
       break;
     case '2':
       setting.traffic = 3;
       setting.speed = 6;
+      car.style.background = 'transparent url("./src/img/playerMed.png") center / contain no-repeat';
       break;
     case '3':
       setting.traffic = 3;
       setting.speed = 8;
+      car.style.background = 'transparent url("./src/img/playerHard.png") center / contain no-repeat';
       break;
   }
 
@@ -88,11 +91,7 @@ function startGame(event) {
     enemy.y = -HEIGHT_ELEM * setting.traffic * (i + 1);
     enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px';
     enemy.style.top = enemy.y + 'px';
-    enemy.style.background = `
-        transparent
-        url(./src/img/enemy${getRandomEnemy(MAX_ENEMY)}.png)
-        center / contain
-        no-repeat`;
+    enemy.style.background += `transparent url("./src/img/enemy${getRandomEnemy(MAX_ENEMY)}.png") center / contain no-repeat`;
     gameArea.append(enemy);
   }
 
@@ -101,7 +100,6 @@ function startGame(event) {
   gameArea.append(car);
   car.style.left = (gameArea.offsetWidth - car.offsetWidth)/2 + 'px';
   car.style.top = 'auto';
-  car.style.bottom = '20px';
   setting.x = car.offsetLeft;
   setting.y = car.offsetTop;
   requestAnimationFrame(playGame);
