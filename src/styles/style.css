@@ -1,14 +1,14 @@
 :root {
   --height-elem: 100px;
-  --width-game-area: 300px;
+  --width-game-area: 400px;
 }
 
 body {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background: linear-gradient(to top, #fceabb, #f8b500);
 }
 
 .hide {
-  display: none;
+  display: none !important;
 }
 
 .game {
@@ -23,68 +23,73 @@ body {
   bottom: 15px;
 }
 
+.enemy {
+  left: 175px;
+}
+
 .gameArea {
   width: var(--width-game-area);
   height: 100vh;
   position: relative;
   margin: auto;
-  background: #222;
+  background: #62635B;
   overflow: hidden;
+  box-shadow: 0px 1px 32px 25px rgba(71,62,71,1);
+  z-index: 2;
 }
 
 .line {
   position: absolute;
   width: 10px;
   height: calc(var(--height-elem) / 2);
-  background: #fff;
-  left: 145px;
+  background: #E9EB9A;
+  box-shadow: 0px 2px 32px 8px rgba(245,245,61,1);
+  left: 195px;
 }
 
 .start {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 1rem;
-  z-index: 200;
-  background: black;
-  font-family: sans-serif;
-  font-weight: 700;
-  height: calc(50px - 2rem);
-  box-shadow: 3px 3px 5px 1px #ccc;
-  font-size: 20px;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  left: 35%;
+  top: 20%;
+  width: 30%;
+  padding: 2rem 0;
+  z-index: 200;
+  font-family: 'Grandstander', cursive;
+  font-weight: 700;
+  font-size: 1.5rem;
+  text-align: center;
 }
+
 
 .btn {
   font: inherit;
-  background-color: black;
-  color: white;
-  border: none;
+  background: linear-gradient(to top, #fdc830, #f37335);
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px 1px #ccc;
+  padding: 2rem;
   cursor: pointer;
-  padding: 5px 15px;
+  transition: .2s;
 }
 
 .btn:not(:last-child) {
-  margin-right: 15px;
+  margin-bottom: 2rem;
 }
 
-.btn:disabled {
-  background-color: #ccc;
-  color: #ddd;
+.btn:hover {
+  box-shadow: -2px 1px 32px 25px rgba(250,250,18,1);
 }
 
 .score {
   position: absolute;
   top: 60px;
   left: 20px;
+  z-index: 100;
   width: 10%;
   background: linear-gradient(to top, #f9bb13, #f9b705);
   box-shadow: -3px -3px 5px 1px #ccc;
   padding: 1rem 0;
-  z-index: 200;
   font-family: 'Grandstander', cursive;
   font-size: 1.5rem;
   color: #fff;
@@ -98,11 +103,11 @@ body {
   position: absolute;
   top: 60px;
   right: 20px;
+  z-index: 100;
   width: 10%;
   background: linear-gradient(to top, #f9bb13, #f9b705);
   box-shadow: -3px -3px 5px 1px #ccc;  
   padding: 1rem 0;
-  z-index: 200;
   font-family: 'Grandstander', cursive;
   font-size: 1.5rem;
   color: #fff;

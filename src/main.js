@@ -219,7 +219,6 @@ function moveEnemy() {
         }
         scoreBest.innerHTML =
           "BEST SCORE:<br>" + localStorage.getItem("scoreBest");
-        console.log(setting.scoreBest);
     }
 
     item.y += setting.speed / 2;
