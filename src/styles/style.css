@@ -77,20 +77,39 @@ body {
 }
 
 .score {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: calc(50px - 2rem);
-  background: black;
-  padding: 1rem;
-  z-index: 200;
-  font-size: 1.5rem;
-  color: skyblue;
-  text-align: center;
-  font-family: sans-serif;
+  position: absolute;
+  top: 60px;
+  left: 20px;
+  width: 10%;
+  background: linear-gradient(to top, #f9bb13, #f9b705);
   box-shadow: -3px -3px 5px 1px #ccc;
+  padding: 1rem 0;
+  z-index: 200;
+  font-family: 'Grandstander', cursive;
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  border-radius: 30px;
+  border: 1px solid #fff;
 }
+
+
+.score-best {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  width: 10%;
+  background: linear-gradient(to top, #f9bb13, #f9b705);
+  box-shadow: -3px -3px 5px 1px #ccc;  
+  padding: 1rem 0;
+  z-index: 200;
+  font-family: 'Grandstander', cursive;
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  border-radius: 30px;
+  border: 1px solid #fff;
+  }
 
 
 .tree {

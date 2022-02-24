@@ -2,17 +2,20 @@ const MAX_ENEMY = 8;
 const HEIGHT_ELEM = 100;
 
 const score = document.querySelector('.score'),
-  start = document.querySelector('.start'),
-  gameArea = document.querySelector('.gameArea'),
-  car = document.createElement('div'),
-  btns = document.querySelectorAll('.btn');
-  treesideLeft = document.querySelector(".treesideLeft"),
-  treesideRight = document.querySelector(".treesideRight");
+      scoreBest = document.querySelector(".score-best"),
+      start = document.querySelector('.start'),
+      gameArea = document.querySelector('.gameArea'),
+      car = document.createElement('div'),
+      btns = document.querySelectorAll('.btn');
+      treesideLeft = document.querySelector(".treesideLeft"),
+      treesideRight = document.querySelector(".treesideRight");
 
 const music = new Audio('./src/audio.mp3');
   music.volume = 0.05;
 
 car.classList.add('car');
+score.classList.add("hide");
+scoreBest.classList.add("hide");
 
 const keys = {
   ArrowUp: false,
@@ -127,8 +130,11 @@ function startGame(event) {
 function playGame() {
 
   if(setting.start) {
+    score.classList.remove("hide");
+    scoreBest.classList.remove("hide");
     setting.score += setting.speed;
     score.innerHTML = 'SCORE<br>' + setting.score;
+    scoreBest.innerHTML = "BEST SCORE:<br>" + localStorage.getItem("scoreBest");
 
     setting.speed = startSpeed + Math.floor(setting.score / 5000);
     moveRoad();
@@ -204,6 +210,16 @@ function moveEnemy() {
       carRect.bottom >= enemyRect.top) {
         setting.start = false;
         start.classList.remove('hide');
+        setting.scoreBest = setting.score;
+
+        if (localStorage.getItem("scoreBest") === null) {
+          localStorage.scoreBest = setting.score;
+        } else if (Number(localStorage.getItem("scoreBest")) < setting.score) {
+          localStorage.scoreBest = setting.score;
+        }
+        scoreBest.innerHTML =
+          "BEST SCORE:<br>" + localStorage.getItem("scoreBest");
+        console.log(setting.scoreBest);
     }
 
     item.y += setting.speed / 2;
