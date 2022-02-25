@@ -2,20 +2,20 @@ const MAX_ENEMY = 8;
 const HEIGHT_ELEM = 100;
 
 const score = document.querySelector('.score'),
-      scoreBest = document.querySelector(".score-best"),
+      record = document.querySelector('.record'),
       start = document.querySelector('.start'),
-      gameArea = document.querySelector('.gameArea'),
+      gameArea = document.querySelector('.game-area'),
       car = document.createElement('div'),
-      btns = document.querySelectorAll('.btn');
-      treesideLeft = document.querySelector(".treesideLeft"),
-      treesideRight = document.querySelector(".treesideRight");
+      btns = document.querySelectorAll('.btn'),
+      treeSideLeft = document.querySelector('.tree-side-left'),
+      treeSideRight = document.querySelector('.tree-side-right');
 
 const music = new Audio('./src/audio.mp3');
-  music.volume = 0.05;
+  music.volume = 0.5;
 
 car.classList.add('car');
-score.classList.add("hide");
-scoreBest.classList.add("hide");
+score.classList.add('hide');
+record.classList.add('hide');
 
 const keys = {
   ArrowUp: false,
@@ -43,12 +43,12 @@ const changeLevel = (lvl) => {
       break;
     case '2':
       setting.traffic = 3;
-      setting.speed = 6;
+      setting.speed = 5;
       car.style.background = 'transparent url("./src/img/playerMid.png") center / contain no-repeat';
       break;
     case '3':
       setting.traffic = 3;
-      setting.speed = 8;
+      setting.speed = 7;
       car.style.background = 'transparent url("./src/img/playerHard.png") center / contain no-repeat';
       break;
   }
@@ -56,13 +56,10 @@ const changeLevel = (lvl) => {
   startSpeed = setting.speed;
 };
 
-function getQuantityElements(heightElement = 100) {
-  return (gameArea.offsetHeight / heightElement) + 1;
-}
+const getQuantityElements = heightElement => (gameArea.offsetHeight / heightElement) + 1;
+const getRandomEnemy = max => Math.floor(Math.random() * max) + 1;
 
-const getRandomEnemy = (max) => Math.floor((Math.random() * max) + 1);
-
-function startGame(event) {
+const startGame = event => {
   const target = event.target;
 
   if(!target.classList.contains('btn')) return;
@@ -73,38 +70,35 @@ function startGame(event) {
 
   changeLevel(levelGame);
   
-  btns.forEach(btn => btn.disabled = true);
-
   gameArea.style.minHeight = Math.floor((document.documentElement.clientHeight - HEIGHT_ELEM) / HEIGHT_ELEM) * HEIGHT_ELEM;
 
   start.classList.add('hide');
 
   gameArea.innerHTML = '';
-  treesideLeft.innerHTML = '';
-  treesideRight.innerHTML = '';
+  treeSideLeft.innerHTML = '';
+  treeSideRight.innerHTML = '';
 
   for (let i = 0; i < getQuantityElements(HEIGHT_ELEM); i++) {
     const line = document.createElement('div');
     line.classList.add('line');
     line.y = i * HEIGHT_ELEM;
     line.style.top = line.y + 'px';
-    line.style.height = (HEIGHT_ELEM / 2) + 'px';
     gameArea.append(line);
 
     
-    function createTree() {
+    const createTree = () => {
       const tree = document.createElement('div');
       tree.classList.add('tree');
-      tree.style.left = Math.random() * (treesideLeft.offsetWidth - 50) + 'px';
-      tree.style.right = Math.random() * (treesideRight.offsetWidth - 50) + 'px';
+      tree.style.left = Math.random() * (treeSideLeft.offsetWidth - 50) + 'px';
+      tree.style.right = Math.random() * (treeSideRight.offsetWidth - 50) + 'px';
       tree.y = i * HEIGHT_ELEM;
       tree.style.top = tree.y + 'px';
     
       return tree;
     }
 
-    treesideLeft.append( createTree() );
-    treesideRight.append( createTree() );
+    treeSideLeft.append( createTree() );
+    treeSideRight.append( createTree() );
   }
 
   for (let i = 0; i < getQuantityElements(HEIGHT_ELEM * setting.traffic); i++) {
@@ -113,7 +107,7 @@ function startGame(event) {
     enemy.y = -HEIGHT_ELEM * setting.traffic * (i + 1);
     enemy.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px';
     enemy.style.top = enemy.y + 'px';
-    enemy.style.background += `transparent url("./src/img/enemy${getRandomEnemy(MAX_ENEMY)}.png") center / contain no-repeat`;
+    enemy.style.background += `transparent url('./src/img/enemy${getRandomEnemy(MAX_ENEMY)}.png') center / contain no-repeat`;
     gameArea.append(enemy);
   }
 
@@ -127,14 +121,14 @@ function startGame(event) {
   requestAnimationFrame(playGame);
 }
 
-function playGame() {
+const playGame = () => {
 
   if(setting.start) {
-    score.classList.remove("hide");
-    scoreBest.classList.remove("hide");
+    score.classList.remove('hide');
+    record.classList.remove('hide');
     setting.score += setting.speed;
     score.innerHTML = 'SCORE<br>' + setting.score;
-    scoreBest.innerHTML = "BEST SCORE:<br>" + localStorage.getItem("scoreBest");
+    record.innerHTML = 'RECORD:<br>' + localStorage.getItem('record');
 
     setting.speed = startSpeed + Math.floor(setting.score / 5000);
     moveRoad();
@@ -161,30 +155,30 @@ function playGame() {
 
     requestAnimationFrame(playGame);
   } else {
-    music.pause()
-    btns.forEach(btn => btn.disabled = false);
+    music.pause();
   }
 
 }
 
-function startRun(event) {
+const startRun = event => {
   if (keys.hasOwnProperty(event.key)) {
     event.preventDefault();
     keys[event.key] = true;
   }
 }
 
-function stopRun(event) {
+const stopRun = event => {
   if (keys.hasOwnProperty(event.key)) {
     event.preventDefault();
     keys[event.key] = false;
   }
 }
 
-function moveRoad() {
+const moveRoad = () => {
   let lines = document.querySelectorAll('.line');
   let trees = document.querySelectorAll('.tree');
-  const moveItem = (item) => {
+  
+  const moveItem = item => {
     item.y += setting.speed;
     item.style.top = item.y + 'px';
 
@@ -192,15 +186,16 @@ function moveRoad() {
       item.y = -HEIGHT_ELEM;
     }
 
-  }
+  };
 
-  lines.forEach( (line) => moveItem(line) );
-  trees.forEach( (tree) => moveItem(tree) );
+  lines.forEach( line => moveItem(line) );
+  trees.forEach( tree => moveItem(tree) );
 }
 
-function moveEnemy() {
+const moveEnemy = () => {
   let enemy = document.querySelectorAll('.enemy');
-  enemy.forEach(function(item){
+
+  enemy.forEach( item => {
     let carRect = car.getBoundingClientRect();
     let enemyRect = item.getBoundingClientRect();
 
@@ -210,22 +205,22 @@ function moveEnemy() {
       carRect.bottom >= enemyRect.top) {
         setting.start = false;
         start.classList.remove('hide');
-        setting.scoreBest = setting.score;
+        setting.record = setting.score;
 
-        if (localStorage.getItem("scoreBest") === null) {
-          localStorage.scoreBest = setting.score;
-        } else if (Number(localStorage.getItem("scoreBest")) < setting.score) {
-          localStorage.scoreBest = setting.score;
+        if (localStorage.getItem('record') === null) {
+          localStorage.record = setting.score;
+        } else if (localStorage.getItem('record') < setting.score) {
+          localStorage.record = setting.score;
         }
-        scoreBest.innerHTML =
-          "BEST SCORE:<br>" + localStorage.getItem("scoreBest");
+        record.innerHTML =
+          'RECORD:<br>' + localStorage.getItem('record');
     }
 
     item.y += setting.speed / 2;
     item.style.top = item.y + 'px';
 
     if (item.y >= gameArea.offsetHeight) {
-      item.y = -HEIGHT_ELEM * setting.traffic;
+      item.y = -150 * setting.traffic;
       item.style.left = Math.floor(Math.random() * (gameArea.offsetWidth - 50)) + 'px';
     }
 

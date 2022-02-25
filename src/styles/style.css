@@ -1,9 +1,13 @@
 :root {
   --height-elem: 100px;
   --width-game-area: 400px;
+  --border-radius: 25px;
 }
 
 body {
+  font-family: 'Grandstander', cursive;
+  font-size: 1.5rem;
+  font-weight: 700;
   background: linear-gradient(to top, #fceabb, #f8b500);
 }
 
@@ -11,23 +15,14 @@ body {
   display: none !important;
 }
 
-.game {
-  height: 100%;
-  display: flex;
-}
-
 .car, .enemy {
   width: calc(var(--height-elem) / 2);
   height: var(--height-elem);
   position: absolute;
-  bottom: 15px;
+  bottom: 150px;
 }
 
-.enemy {
-  left: 175px;
-}
-
-.gameArea {
+.game-area {
   width: var(--width-game-area);
   height: 100vh;
   position: relative;
@@ -35,7 +30,7 @@ body {
   background: #62635B;
   overflow: hidden;
   box-shadow: 0px 1px 32px 25px rgba(71,62,71,1);
-  z-index: 2;
+  z-index: 1;
 }
 
 .line {
@@ -55,18 +50,16 @@ body {
   top: 20%;
   width: 30%;
   padding: 2rem 0;
-  z-index: 200;
-  font-family: 'Grandstander', cursive;
-  font-weight: 700;
-  font-size: 1.5rem;
   text-align: center;
+  z-index: 3;
 }
 
-
 .btn {
-  font: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
   background: linear-gradient(to top, #fdc830, #f37335);
-  border-radius: 10px;
+  border-radius: var(--border-radius);
   box-shadow: 3px 3px 5px 1px #ccc;
   padding: 2rem;
   cursor: pointer;
@@ -85,34 +78,30 @@ body {
   position: absolute;
   top: 60px;
   left: 20px;
-  z-index: 100;
+  z-index: 2;
   width: 10%;
   background: linear-gradient(to top, #f9bb13, #f9b705);
   box-shadow: -3px -3px 5px 1px #ccc;
   padding: 1rem 0;
-  font-family: 'Grandstander', cursive;
-  font-size: 1.5rem;
   color: #fff;
   text-align: center;
-  border-radius: 30px;
+  border-radius: var(--border-radius);
   border: 1px solid #fff;
 }
 
 
-.score-best {
+.record {
   position: absolute;
   top: 60px;
   right: 20px;
-  z-index: 100;
+  z-index: 2;
   width: 10%;
   background: linear-gradient(to top, #f9bb13, #f9b705);
   box-shadow: -3px -3px 5px 1px #ccc;  
   padding: 1rem 0;
-  font-family: 'Grandstander', cursive;
-  font-size: 1.5rem;
   color: #fff;
   text-align: center;
-  border-radius: 30px;
+  border-radius: var(--border-radius);
   border: 1px solid #fff;
   }
 
@@ -121,17 +110,17 @@ body {
   position: absolute;
   width: 60px;
   height: 60px;
-  background: transparent url("../img/tree.png") center / cover no-repeat;
+  background: transparent url('../img/tree.png') center / cover no-repeat;
 }
 
-.treesideLeft, .treesideRight {
+.tree-side-left, .tree-side-right {
   position: absolute;
   width: calc((100% - var(--width-game-area)) / 2);
   height: 100vh;
   overflow: hidden;
 }
 
-.treesideRight {
+.tree-side-right {
   top: 0;
   right: 0;
 }
