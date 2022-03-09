@@ -1,0 +1,26 @@
+{
+  "name": "nfjs",
+  "version": "1.0.0",
+  "description": "To start the game, click on the link https://greenkrok.github.io/Racing-Game/",
+  "main": "src/scripts/electron.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-packager ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Greenkrok/Racing-Game.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Greenkrok/Racing-Game/issues"
+  },
+  "homepage": "https://github.com/Greenkrok/Racing-Game#readme",
+  "devDependencies": {
+    "electron": "^17.1.1",
+    "electron-packager": "^15.4.0",
+    "path": "^0.12.7",
+    "url": "^0.11.0"
+  }
+}
