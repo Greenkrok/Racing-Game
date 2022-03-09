@@ -4,7 +4,7 @@ To start the game, click on the link https://greenkrok.github.io/Racing-Game/
 
 If you want to run the game on your local machine:
 
-1) download the repository https://github.com/Greenkrok/Racing-Game .git
+1) download the repository https://github.com/Greenkrok/Racing-Game.git
 
 2) install modules in the project (npm install)
 
