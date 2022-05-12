@@ -1,6 +1,4 @@
-# Racing-Game
-
-To start the game, click on the link https://greenkrok.github.io/Racing-Game/
+# <a href="https://greenkrok.github.io/Racing-Game/"> Start game </a>
 
 If you want to run the game on your local machine:
   1) download the repository (git clone https://github.com/Greenkrok/Racing-Game.git)
